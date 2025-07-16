@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCCD</title>
+</head>
+<body>
+    <h3>Số seri</h3>
+    <input type="text" id="seri" placeholder="VD: 012345678912" onkeydown="ifEnter(event, checkseri)">
+    <button onclick="checkseri()">Kiểm tra</button>
+    <p id="seriResult"></p>
+
+    <h3>Họ và Tên</h3>
+    <input type="text" id="HoTen" placeholder="VD: Võ Thị Hòa" onkeydown="ifEnter(event, checkHoTen)">
+    <button onclick="checkHoTen()">Kiểm tra</button>
+    <p id="HoTenResult"></p>
+
+    <h3>Ngày sinh</h3>
+    <input type="text" id="ngaysinh" placeholder="20-09-2005" onkeydown="ifEnter(event, checkngaysinh)">
+    <button onclick="checkngaysinh()">Kiểm tra</button>
+    <p id="ngaysinhResult"></p>
+<script>
+    function ifEnter (event, callbackFunction) {
+    if (event.key === "Enter") {
+    callbackFunction();
+    }}
+    //SERI
+    function checkseri() {
+    var val = document.getElementById('seri').value.trim();
+    var regex = /^\d{12}$/;
+    const result = regex.test(val) ? "số seri hợp lệ" : "Sai định dạng (XXXXXXXXXXXX)";
+    document.getElementById('seriResult').innerText = result;
+    }
+    //BIRTHDAY
+    function checkngaysinh() {
+    var val = document.getElementById('ngaysinh').value.trim();
+    var regex = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/;
+    const result = regex.test(val) ? "ngày sinh hợp lệ" : "Sai định dạng (dd-mm-yyyy)";
+    document.getElementById('ngaysinhResult').innerText = result;
+    }
+    //HOTEN
+    function checkHoTen() {
+    var val = document.getElementById('HoTen').value;
+    var regex = /^$/;
+    const result = regex.test(val) ? "Tên hợp lệ" : "Sai định dạng tên";
+    document.getElementById('HoTenResult').innerText = result;
+    }
+</script>
+</body>
+</html>
