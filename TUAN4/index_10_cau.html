@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Practice</title>
+  <style>
+    body { background: rgb(215, 245, 230);}
+    button { 
+        padding: 10px;
+        background:rgb(78, 34, 166);
+        color: aliceblue;
+        border-radius: 10px;
+        border: none;
+        margin: 10px;
+    }
+    input {
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        margin: 10px;
+    }
+  </style>
+</head>
+<body>
+    <!-- Bài 1 -->
+    <h3>1. Hello your name (console)</h3>
+    <input type="text" id="name1" placeholder="Your name" onkeydown="ifEnter(event,sayHelloConsole)">
+    <button onclick="sayHelloConsole()">Click button</button>
+
+    <!-- Bài 2 -->
+    <h3>2. Hello your name (on web)</h3>
+    <input type="text" id="name2" placeholder="Your name" onkeydown="ifEnter(event,sayHelloWeb)">
+    <button onclick="sayHelloWeb()">Click button</button>
+    <p id="helloText"></p>
+
+    <!-- Bài 3 -->
+    <h3>3. Sum 2 numbers</h3>
+    <input type="number" id="num1" placeholder="Number 1" onkeydown="ifEnter(event,sumNumbers)">
+    <input type="number" id="num2" placeholder="Number 2" onkeydown="ifEnter(event,sumNumbers)">
+    <button onclick="sumNumbers()">Sum</button>
+    <p id="sumResult"></p>
+
+    <!-- Bài 4 -->
+    <h3>4. Check if input exists</h3>
+    <input type="text" id="checkInput" placeholder="Nhập gì đó..." onkeydown="ifEnter(event,checkInput)">
+    <button onclick="checkInput()">Click</button>
+    <p id="checkResult"></p>
+
+    <!-- Bài 5 -->
+    <h3>5. Detect word or number</h3>
+    <input type="text" id="detectInput" placeholder="Nhập chữ hoặc số" onkeydown="ifEnter(event,detectType)">
+    <button onclick="detectType()">Check</button>
+    <p id="detectResult"></p>
+
+    <!-- Bài 3: bản nâng cấp -->
+    <h3>6. Sum 2 numbers prenium</h3>
+    <input type="text" id="numA" placeholder="Nhập số thứ 1" onkeydown="ifEnter(event, validateSum)">
+    <input type="text" id="numB" placeholder="Nhập số thứ 2" onkeydown="ifEnter(event, validateSum)">
+    <button onclick="validateSum()">Tính tổng</button>
+    <p id="sumUpgradeResult"></p>
+
+    <!-- Bài 7 -->
+    <h3>7. Kiểm tra số điện thoại 10 chữ số</h3>
+    <input type="text" id="phone10" placeholder="Nhập số 10 chữ số" onkeydown="ifEnter(event, checkPhone10)">
+    <button onclick="checkPhone10()">Kiểm tra</button>
+    <p id="phone10Result"></p>
+
+    <!-- Bài 8 -->
+    <h3>8. Kiểm tra số theo dạng (024-XXXXXXX)</h3>
+    <input type="text" id="hanoiPhone" placeholder="Ví dụ: 024-1234567" onkeydown="ifEnter(event, checkHanoiPhone)">
+    <button onclick="checkHanoiPhone()">Kiểm tra</button>
+    <p id="hanoiPhoneResult"></p>
+
+    <!-- Bài 9 -->
+    <h3>9. Kiểm tra số theo dạng (09XXXXXXXX)</h3>
+    <input type="text" id="mobiePhone" placeholder="Ví dụ: 0941234567" onkeydown="ifEnter(event, checkmbPhone)">
+    <button onclick="checkmbPhone()">Kiểm tra</button>
+    <p id="mobiePhoneResult"></p>
+
+    <!-- Bài 10 -->
+    <h3>10. Kiểm tra mã nhân viên FPT</h3>
+    <input type="text" id="empCode" placeholder="Ví dụ: FPT-123456" onkeydown="ifEnter(event, checkFPTCode)">
+    <button onclick="checkFPTCode()">Kiểm tra</button>
+    <p id="empCodeResult"></p>
+    
+    <!-- Bài 11 -->
+    <h3>11. Kiểm tra ngày sinh</h3>
+    <input type="text" id="ngaysinh" placeholder="20-09-2005" onkeydown="ifEnter(event, checkngaysinh)">
+    <button onclick="checkngaysinh()">Kiểm tra</button>
+    <p id="ngaysinhResult"></p>
+
+  <script>
+    function ifEnter (event, callbackFunction) {
+    if (event.key === "Enter") {
+    callbackFunction();
+    }}
+    //11
+    function checkngaysinh() {
+    var val = document.getElementById('ngaysinh').value.trim();
+    var regex = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/;
+    const result = regex.test(val) ? "ngày sinh hợp lệ" : "Sai định dạng (dd-mm-yyyy)";
+    document.getElementById('ngaysinhResult').innerText = result;
+    }
+
+    //1
+    function sayHelloConsole() {
+    var name = document.getElementById('name1').value.trim();
+    if (name === "") {
+        console.error("Bạn chưa nhập tên");
+    } else {
+        console.log("Hello " + name);
+    }
+    }
+    //2
+    function sayHelloWeb() {
+      const name = document.getElementById('name2').value;
+      document.getElementById('helloText').innerText = "Hello " + name;
+    }
+    //3
+    function sumNumbers() {
+        var num1 = parseFloat(document.getElementById('num1').value);
+        var num2 = parseFloat(document.getElementById('num2').value);
+        if (!isNaN(num1) && !isNaN(num2)) {
+          document.getElementById('sumResult').innerText = "Sum = " + (num1 + num2);
+        } else {
+          document.getElementById('sumResult').innerText = "Vui lòng nhập 2 số";
+        }
+    }
+    //4
+    function checkInput() {
+        var input = document.getElementById('checkInput').value;
+        document.getElementById('checkResult').innerText =
+          input.trim() === "" ? "Input please" : "Đã nhập rồi";
+      }
+    //5
+    function detectType() {
+        var val = document.getElementById('detectInput').value.trim();
+        if (!val) {
+          document.getElementById('detectResult').innerText = "Vui lòng nhập dữ liệu";
+          return;
+        }
+        var isNumber = !isNaN(val);
+        document.getElementById('detectResult').innerText =
+          isNumber ? "Bạn nhập số" : "Bạn nhập chuỗi";
+      }
+    //bài 3 nhưng nâng cấp hơn
+    function validateSum() {
+        var a = document.getElementById('numA').value.trim();
+        var b = document.getElementById('numB').value.trim();
+
+        let message = "";
+
+        if (a === "") message += " Bạn chưa nhập ô số 1\n";
+        if (b === "") message += " Bạn chưa nhập ô số 2\n";
+
+        if (a !== "" && isNaN(a)) message += " Ô số 1 không phải là số\n";
+        if (b !== "" && isNaN(b)) message += " Ô số 2 không phải là số\n";
+
+        if (message !== "") {
+            document.getElementById('sumUpgradeResult').innerText = message;
+            return;
+        }
+
+        var sum = parseFloat(a) + parseFloat(b);
+        document.getElementById('sumUpgradeResult').innerText = "Tổng = " + sum;
+        }
+
+    //7 
+    function checkPhone10() {
+        var val = document.getElementById('phone10').value.trim();
+        var regex = /^\d{10}$/;
+        var result = regex.test(val) ? "Hợp lệ" : "Không hợp lệ (cần 10 chữ số)";
+        document.getElementById('phone10Result').innerText = result;
+        }
+
+    //8
+    function checkHanoiPhone() {
+        var val = document.getElementById('hanoiPhone').value.trim();
+        var regex = /^024-\d{7}$/;
+        var result = regex.test(val) ? " Đúng định dạng Hà Nội" : "Sai định dạng (024 + 7 số)";
+        document.getElementById('hanoiPhoneResult').innerText = result;
+    }
+
+    //9
+    function checkmbPhone() {
+        var val = document.getElementById('mobiePhone').value.trim();
+        var regex = /^09\d{8}$/;
+        var result = regex.test(val) ? " Đúng định dạng mobie" : "Sai định dạng (09 + 8 số)";
+        document.getElementById('mobiePhoneResult').innerText = result;
+    }
+
+    //10
+    function checkFPTCode() {
+        var val = document.getElementById('empCode').value.trim();
+        var regex = /^FPT-\d{6}$/;
+        var result = regex.test(val) ? "Mã hợp lệ" : "Sai định dạng (FPT-xxxxxx)";
+        document.getElementById('empCodeResult').innerText = result;
+        }
+
+  </script>
+</body>
+</html>
